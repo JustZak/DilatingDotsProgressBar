@@ -9,21 +9,121 @@
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
+	android:background="#CFD8DC"
 	app:layout_behavior="@string/appbar_scrolling_view_behavior"
 	tools:context="com.zl.reik.dilatingexample.MainActivity"
 	tools:showIn="@layout/activity_main">
 
-	<com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
-		android:id="@+id/progress"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="128dip"
-		android:radius="5dip"
-		android:color="#920033"
-		app:dilating_dots_numDots="3"
-		app:dilating_dots_scaleMultiplier="1.5"
-		app:dilating_dots_growthSpeed="500"
-		app:dilating_dots_horizontalSpacing="4dip"
-		/>
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="150dp">
+
+		<com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
+			android:id="@+id/progress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:radius="5dp"
+			android:color="#8C2323"
+			app:dilating_dots_numDots="3"
+			app:dilating_dots_scaleMultiplier="1.5"
+			app:dilating_dots_growthSpeed="500"
+			app:dilating_dots_horizontalSpacing="4dp"
+			/>
+
+	</FrameLayout>
+
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_number_dots"
+			style="@style/SeekbarLabel"
+			android:text="@string/number_of_dots"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_number_dots"
+			style="@style/Seekbar"
+			android:max="8"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_radius"
+			style="@style/SeekbarLabel"
+			android:text="@string/radius"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_radius"
+			style="@style/Seekbar"
+			android:max="50"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_spacing"
+			style="@style/SeekbarLabel"
+			android:text="@string/spacing"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_spacing"
+			style="@style/Seekbar"
+			android:max="100"/>
+
+
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_growth_speed"
+			style="@style/SeekbarLabel"
+			android:text="@string/growth_speed"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_growth_speed"
+			style="@style/Seekbar"
+			android:max="1000"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_scale_multiplier"
+			style="@style/SeekbarLabel"
+			android:text="@string/scale_multiplier"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_scale_multiplier"
+			style="@style/Seekbar"
+			android:max="100"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			android:id="@+id/textview_color"
+			style="@style/SeekbarLabel"
+			android:text="@string/color"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_color"
+			style="@style/Seekbar"
+			android:max="100"/>
+
+	</LinearLayout>
 
 </LinearLayout>

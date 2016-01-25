@@ -1,4 +1,10 @@
 <resources>
 	<string name="app_name">DilatingDotsProgressBar</string>
-	<string name="title_activity_main">MainActivity</string>
+	<string name="title_activity_main">DilatingDotsProgressBar</string>
+	<string name="number_of_dots">Number of Dots</string>
+	<string name="radius">Radius:</string>
+	<string name="spacing">Spacing:</string>
+	<string name="growth_speed">Growth Speed:</string>
+	<string name="scale_multiplier">Scale Multiplier:</string>
+	<string name="color">Color:</string>
 </resources>
