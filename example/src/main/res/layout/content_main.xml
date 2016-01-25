@@ -38,7 +38,6 @@
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_number_dots"
 			style="@style/SeekbarLabel"
 			android:text="@string/number_of_dots"/>
 
@@ -47,13 +46,16 @@
 			style="@style/Seekbar"
 			android:max="8"/>
 
+		<TextView
+			android:id="@+id/textview_num_dots"
+			style="@style/SeekbarValueText" />
+
 	</LinearLayout>
 
 	<LinearLayout
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_radius"
 			style="@style/SeekbarLabel"
 			android:text="@string/radius"/>
 
@@ -62,13 +64,16 @@
 			style="@style/Seekbar"
 			android:max="50"/>
 
+		<TextView
+			android:id="@+id/textview_radius"
+			style="@style/SeekbarValueText"/>
+
 	</LinearLayout>
 
 	<LinearLayout
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_spacing"
 			style="@style/SeekbarLabel"
 			android:text="@string/spacing"/>
 
@@ -77,6 +82,9 @@
 			style="@style/Seekbar"
 			android:max="100"/>
 
+		<TextView
+			android:id="@+id/textview_spacing"
+			style="@style/SeekbarValueText"/>
 
 
 	</LinearLayout>
@@ -85,7 +93,6 @@
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_growth_speed"
 			style="@style/SeekbarLabel"
 			android:text="@string/growth_speed"/>
 
@@ -94,13 +101,16 @@
 			style="@style/Seekbar"
 			android:max="1000"/>
 
+		<TextView
+			android:id="@+id/textview_growth_speed"
+			style="@style/SeekbarValueText"/>
+
 	</LinearLayout>
 
 	<LinearLayout
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_scale_multiplier"
 			style="@style/SeekbarLabel"
 			android:text="@string/scale_multiplier"/>
 
@@ -109,13 +119,16 @@
 			style="@style/Seekbar"
 			android:max="100"/>
 
+		<TextView
+			android:id="@+id/textview_scale_multiplier"
+			style="@style/SeekbarValueText"/>
+
 	</LinearLayout>
 
 	<LinearLayout
 		style="@style/SeekbarLayout">
 
 		<TextView
-			android:id="@+id/textview_color"
 			style="@style/SeekbarLabel"
 			android:text="@string/color"/>
 
@@ -123,6 +136,10 @@
 			android:id="@+id/seekbar_color"
 			style="@style/Seekbar"
 			android:max="100"/>
+
+		<TextView
+			android:id="@+id/textview_color"
+			style="@style/SeekbarValueText"/>
 
 	</LinearLayout>
 

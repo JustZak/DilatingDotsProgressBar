@@ -317,10 +317,8 @@ public class DilatingDotsProgressBar extends View{
         setupDots();
     }
 
-    public void setDotColor(int progress) {
-        float[] hsvColor = {0, 0.75f, 0.55f};
-        hsvColor[0] = 360f * progress / 100;
-        mDotColor = Color.HSVToColor(hsvColor);
+    public void setDotColor(int color) {
+        mDotColor = color;
         for (DilatingDotDrawable dot : mDrawables) {
             dot.setColor(mDotColor);
         }
@@ -346,5 +344,9 @@ public class DilatingDotsProgressBar extends View{
 
     public int getNumberOfDots() {
         return mNumberDots;
+    }
+
+    public float getDotScaleMultiplier() {
+        return mDotScaleMultiplier;
     }
 }
