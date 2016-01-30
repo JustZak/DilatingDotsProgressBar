@@ -99,14 +99,6 @@ public class DilatingDotsProgressBar extends View{
         }
     }
 
-    private void calculateMaxRadius() {
-        mDotMaxRadius = mDotRadius * mDotScaleMultiplier;
-    }
-
-    private void calculateWidthBetweenDotCenters() {
-        mWidthBetweenDotCenters = (int) (mDotRadius * 2) + (int) mHorizontalSpacing;
-    }
-
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -210,6 +202,14 @@ public class DilatingDotsProgressBar extends View{
 
     private float computeWidth() {
         return (((mDotRadius * 2) + mHorizontalSpacing) * mDrawables.size()) - mHorizontalSpacing;
+    }
+
+    private void calculateMaxRadius() {
+        mDotMaxRadius = mDotRadius * mDotScaleMultiplier;
+    }
+
+    private void calculateWidthBetweenDotCenters() {
+        mWidthBetweenDotCenters = (int) (mDotRadius * 2) + (int) mHorizontalSpacing;
     }
 
     private void initDots() {
