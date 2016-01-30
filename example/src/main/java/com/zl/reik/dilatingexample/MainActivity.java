@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private final float saturation = 0.75f;
     private final float value = 0.55f;
 
+    private final int numDotsMin = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private void setupSeekbars(){
         mNumberDotsSeekbar.setProgress(mDilatingDotsProgressBar.getNumberOfDots());
         mNumberDotsSeekbar.setOnSeekBarChangeListener(this);
-        mNumDotsTextView.setText(String.valueOf(mDilatingDotsProgressBar.getNumberOfDots()));
+        int dots = mDilatingDotsProgressBar.getNumberOfDots();
+        dots = (dots < 2) ? 2 : dots;
+        mNumDotsTextView.setText(String.valueOf(dots));
 
         mRadiusSeekbar.setProgress((int)mDilatingDotsProgressBar.getDotRadius());
         mRadiusSeekbar.setOnSeekBarChangeListener(this);
@@ -107,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             mDilatingDotsProgressBar.setGrowthSpeed(progress);
             mGrowthSpeedTextView.setText(String.valueOf(progress));
         } else if (seekBar == mNumberDotsSeekbar) {
-            mDilatingDotsProgressBar.setNumberOfDots(progress);
-            mNumDotsTextView.setText(String.valueOf(progress));
+            mDilatingDotsProgressBar.setNumberOfDots(progress + 2);
+            mNumDotsTextView.setText(String.valueOf(progress + 2));
         } else if (seekBar == mColorSeekbar) {
             mDilatingDotsProgressBar.setDotColor(getHSVColor(progress));
             mColorTextView.setText(Integer.toHexString(getHSVColor(progress)));

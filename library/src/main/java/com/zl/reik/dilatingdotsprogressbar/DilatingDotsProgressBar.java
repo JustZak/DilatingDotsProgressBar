@@ -283,6 +283,10 @@ public class DilatingDotsProgressBar extends View{
         return mShouldAnimate;
     }
 
+    // -------------------------------
+    // ------ Getters & Setters ------
+    // -------------------------------
+
     public void setDotRadius(float radius) {
         reset();
         mDotRadius = radius;

@@ -44,7 +44,7 @@
 		<android.support.v7.widget.AppCompatSeekBar
 			android:id="@+id/seekbar_number_dots"
 			style="@style/Seekbar"
-			android:max="8"/>
+			android:max="6" />
 
 		<TextView
 			android:id="@+id/textview_num_dots"
