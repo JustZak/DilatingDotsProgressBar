@@ -25,10 +25,10 @@
 			android:layout_gravity="center"
 			android:radius="5dp"
 			android:color="#8C2323"
-			app:dilating_dots_numDots="3"
-			app:dilating_dots_scaleMultiplier="1.5"
-			app:dilating_dots_growthSpeed="500"
-			app:dilating_dots_horizontalSpacing="4dp"
+			app:dd_numDots="3"
+			app:dd_scaleMultiplier="1.5"
+			app:dd_growthSpeed="500"
+			app:dd_horizontalSpacing="4dp"
 			/>
 
 	</FrameLayout>

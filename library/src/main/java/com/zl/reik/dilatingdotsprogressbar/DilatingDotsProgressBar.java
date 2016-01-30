@@ -72,15 +72,15 @@ public class DilatingDotsProgressBar extends View{
 
     private void init(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DilatingDotsProgressBar);
-        mNumberDots = a.getInt(R.styleable.DilatingDotsProgressBar_dilating_dots_numDots, 3);
+        mNumberDots = a.getInt(R.styleable.DilatingDotsProgressBar_dd_numDots, 3);
         mDotRadius = a.getDimension(R.styleable.DilatingDotsProgressBar_android_radius, 8);
         mDotColor = a.getColor(R.styleable.DilatingDotsProgressBar_android_color, 0xff9c27b0);
         mDotScaleMultiplier = a.getFloat(
-            R.styleable.DilatingDotsProgressBar_dilating_dots_scaleMultiplier,
+            R.styleable.DilatingDotsProgressBar_dd_scaleMultiplier,
             DEFAULT_GROWTH_MULTIPLIER);
-        mDotGrowthSpeed = a.getInt(R.styleable.DilatingDotsProgressBar_dilating_dots_growthSpeed, 300);
+        mDotGrowthSpeed = a.getInt(R.styleable.DilatingDotsProgressBar_dd_growthSpeed, 300);
         mHorizontalSpacing =
-            a.getDimension(R.styleable.DilatingDotsProgressBar_dilating_dots_horizontalSpacing, 12);
+            a.getDimension(R.styleable.DilatingDotsProgressBar_dd_horizontalSpacing, 12);
         a.recycle();
 
         mShouldAnimate = false;

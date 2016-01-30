@@ -3,9 +3,9 @@
 	<declare-styleable name="DilatingDotsProgressBar">
 		<attr name="android:radius" />
 		<attr name="android:color" />
-		<attr name="dilating_dots_numDots" format="integer" />
-		<attr name="dilating_dots_scaleMultiplier" format="float" />
-		<attr name="dilating_dots_growthSpeed" format="integer" />
-		<attr name="dilating_dots_horizontalSpacing" format="dimension" />
+		<attr name="dd_numDots" format="integer" />
+		<attr name="dd_scaleMultiplier" format="float" />
+		<attr name="dd_growthSpeed" format="integer" />
+		<attr name="dd_horizontalSpacing" format="dimension" />
 	</declare-styleable>
 </resources>
