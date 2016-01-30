@@ -22,14 +22,13 @@ Uploading to maven central soon.
 			/>
 ```
 
-Show progress bar and start animating
 ```android
   mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
+  
+  // show progress bar and start animating
   mDilatingDotsProgressBar.showNow();
-```
-
-Stop animating and hide
-```android
+  
+  // stop animation and hide
   mDilatingDotsProgressBar.hideNow();
 ```
 
