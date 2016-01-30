@@ -4,7 +4,7 @@
 	<string name="number_of_dots">Number of Dots</string>
 	<string name="radius">Radius:</string>
 	<string name="spacing">Spacing:</string>
-	<string name="growth_speed">Growth Speed:</string>
+	<string name="animation_duration">Animation Length:</string>
 	<string name="scale_multiplier">Scale Multiplier:</string>
 	<string name="color">Color:</string>
 </resources>

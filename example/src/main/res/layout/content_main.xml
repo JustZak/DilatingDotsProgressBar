@@ -94,15 +94,15 @@
 
 		<TextView
 			style="@style/SeekbarLabel"
-			android:text="@string/growth_speed"/>
+			android:text="@string/animation_duration"/>
 
 		<android.support.v7.widget.AppCompatSeekBar
-			android:id="@+id/seekbar_growth_speed"
+			android:id="@+id/seekbar_animation_duration"
 			style="@style/Seekbar"
 			android:max="1000"/>
 
 		<TextView
-			android:id="@+id/textview_growth_speed"
+			android:id="@+id/textview_animation_duration"
 			style="@style/SeekbarValueText"/>
 
 	</LinearLayout>
