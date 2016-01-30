@@ -23,13 +23,13 @@ Uploading to maven central soon.
 ```
 
 Show progress bar and start animating
-```java
+```android
   mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
   mDilatingDotsProgressBar.showNow();
 ```
 
 Stop animating and hide
-```java
+```android
   mDilatingDotsProgressBar.hideNow();
 ```
 
@@ -42,6 +42,8 @@ Stop animating and hide
 | dd_scaleMultiplier | float |set the maximum size the dot will expand to. (scaleMultiplier x radius)
 | dd_animationDuration | int |set the length of a single dot's full animation (in milliseconds) 
 | dd_horizontalSpacing | dimension |set the number of dp between each dot
+
+
 
 ##Credit
 Thanks to [Alessandro Crugnola](https://github.com/sephiroth74) for his contributions.
