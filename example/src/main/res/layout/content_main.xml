@@ -27,7 +27,7 @@
 			android:color="#8C2323"
 			app:dd_numDots="3"
 			app:dd_scaleMultiplier="1.5"
-			app:dd_growthSpeed="500"
+			app:dd_animationDuration="500"
 			app:dd_horizontalSpacing="4dp"
 			/>
 

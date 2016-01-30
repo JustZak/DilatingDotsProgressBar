@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     public final static String TAG = MainActivity.class.getSimpleName();
     private AppCompatSeekBar mRadiusSeekbar;
     private AppCompatSeekBar mSpacingSeekbar;
-    private AppCompatSeekBar mGrowthSpeedSeekbar;
+    private AppCompatSeekBar mAnimationDurationSeekbar;
     private AppCompatSeekBar mNumberDotsSeekbar;
     private AppCompatSeekBar mColorSeekbar;
     private AppCompatSeekBar mScaleMultiplierSeekbar;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mNumberDotsSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_number_dots);
         mRadiusSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_radius);
         mSpacingSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_spacing);
-        mGrowthSpeedSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_growth_speed);
+        mAnimationDurationSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_growth_speed);
         mColorSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_color);
         mScaleMultiplierSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_scale_multiplier);
 
@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mSpacingSeekbar.setOnSeekBarChangeListener(this);
         mSpacingTextView.setText(String.valueOf(mDilatingDotsProgressBar.getHorizontalSpacing()));
 
-        mGrowthSpeedSeekbar.setProgress(mDilatingDotsProgressBar.getDotGrowthSpeed());
-        mGrowthSpeedSeekbar.setOnSeekBarChangeListener(this);
+        mAnimationDurationSeekbar.setProgress(mDilatingDotsProgressBar.getDotGrowthSpeed());
+        mAnimationDurationSeekbar.setOnSeekBarChangeListener(this);
         mGrowthSpeedTextView.setText(String.valueOf(mDilatingDotsProgressBar.getDotGrowthSpeed()));
 
         int progress = seekbarProgressFromValue(
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         } else if (seekBar == mSpacingSeekbar) {
             mDilatingDotsProgressBar.setDotSpacing(progress);
             mSpacingTextView.setText(String.valueOf(progress));
-        } else if (seekBar == mGrowthSpeedSeekbar) {
+        } else if (seekBar == mAnimationDurationSeekbar) {
             mDilatingDotsProgressBar.setGrowthSpeed(progress);
             mGrowthSpeedTextView.setText(String.valueOf(progress));
         } else if (seekBar == mNumberDotsSeekbar) {

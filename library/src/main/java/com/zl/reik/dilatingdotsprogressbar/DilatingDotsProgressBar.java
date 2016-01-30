@@ -7,7 +7,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -23,7 +22,7 @@ public class DilatingDotsProgressBar extends View{
     private static final int MIN_SHOW_TIME = 500; // ms
     private static final int MIN_DELAY = 500; // ms
     private int mDotColor;
-    private int mDotGrowthSpeed;
+    private int mAnimationDuration;
     private int mWidthBetweenDotCenters;
     private int mNumberDots;
     private float mDotRadius;
@@ -78,7 +77,7 @@ public class DilatingDotsProgressBar extends View{
         mDotScaleMultiplier = a.getFloat(
             R.styleable.DilatingDotsProgressBar_dd_scaleMultiplier,
             DEFAULT_GROWTH_MULTIPLIER);
-        mDotGrowthSpeed = a.getInt(R.styleable.DilatingDotsProgressBar_dd_growthSpeed, 300);
+        mAnimationDuration = a.getInt(R.styleable.DilatingDotsProgressBar_dd_animationDuration, 300);
         mHorizontalSpacing =
             a.getDimension(R.styleable.DilatingDotsProgressBar_dd_horizontalSpacing, 12);
         a.recycle();
@@ -222,7 +221,7 @@ public class DilatingDotsProgressBar extends View{
 
             ValueAnimator growAnimator =
                 ObjectAnimator.ofFloat(dot, "radius", mDotRadius, mDotMaxRadius, mDotRadius);
-            growAnimator.setDuration(mDotGrowthSpeed);
+            growAnimator.setDuration(mAnimationDuration);
             growAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
             if (i == mNumberDots) {
@@ -237,7 +236,7 @@ public class DilatingDotsProgressBar extends View{
                     });
             }
 
-            growAnimator.setStartDelay((i - 1) * (int) (START_DELAY_FACTOR * mDotGrowthSpeed));
+            growAnimator.setStartDelay((i - 1) * (int) (START_DELAY_FACTOR * mAnimationDuration));
             mAnimations.add(growAnimator);
         }
     }
@@ -304,7 +303,7 @@ public class DilatingDotsProgressBar extends View{
 
     public void setGrowthSpeed(int growthSpeed) {
         reset();
-        mDotGrowthSpeed = growthSpeed;
+        mAnimationDuration = growthSpeed;
         setupDots();
     }
 
@@ -335,7 +334,7 @@ public class DilatingDotsProgressBar extends View{
     }
 
     public int getDotGrowthSpeed() {
-        return mDotGrowthSpeed;
+        return mAnimationDuration;
     }
 
     public float getDotRadius() {
