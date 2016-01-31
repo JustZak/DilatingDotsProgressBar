@@ -1,4 +1,5 @@
 #DilatingDotsProgressBar
+![](https://img.shields.io/badge/Android%20Arsenal-DilatingDotsProgressBar-green.svg?style=true)
 
 ![](/../demo/example/src/main/assets/dotdemo.gif?raw=true)
 
