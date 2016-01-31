@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 23
@@ -18,8 +20,82 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'DilatingDotsProgressBar'
+            description 'An indeterminate progress bar with dots that expand and contract'
+            url 'https://github.com/JustZak/DilatingDotsProgressBar'
+            inceptionYear '2016'
+
+            packaging 'aar'
+            groupId 'com.zl.reik'
+            artifactId 'dilatingdotsprogressbar'
+            version '1.0.0'
+
+            licenses {
+                license {
+                    name 'The MIT License'
+                    url 'https://opensource.org/licenses/MIT'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection 'https://github.com/JustZak/DilatingDotsProgressBar.git'
+                url 'https://github.com/JustZak/DilatingDotsProgressBar'
+
+            }
+            developers {
+                developer {
+                    name 'Zachary Reik'
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    pkg {
+        repo = 'maven'
+        name = 'DilatingDotsProgressBar'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/JustZak/DilatingDotsProgressBar.git'
+        publish = true
+        version {
+            name = '1.0.0'
+            desc = 'DilatingDotsProgressBar version 1.0.0'
+            released  = new Date()
+        }
+    }
 }
