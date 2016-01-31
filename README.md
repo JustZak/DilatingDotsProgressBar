@@ -4,7 +4,7 @@
 
 ##Installation
 
-Uploading to maven central soon.
+Waiting for approval for jCenter
 
 ##Usage
 
