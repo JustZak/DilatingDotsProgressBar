@@ -1,5 +1,6 @@
 #DilatingDotsProgressBar
-![](https://img.shields.io/badge/Android%20Arsenal-DilatingDotsProgressBar-green.svg?style=true)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DilatingDotsProgressBar-green.svg?style=true)](https://android-arsenal.com/details/1/3088)
+
 
 ![](/../demo/example/src/main/assets/dotdemo.gif?raw=true)
 
