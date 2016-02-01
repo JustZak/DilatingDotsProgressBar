@@ -27,6 +27,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
 }
 
+version = '1.0.0'
+group = 'com.zl.reik'
+
 install {
     repositories.mavenInstaller {
         pom.project {
@@ -36,7 +39,7 @@ install {
             inceptionYear '2016'
 
             packaging 'aar'
-            groupId 'com.zl.reik'
+            groupId 'com.github.justzak'
             artifactId 'dilatingdotsprogressbar'
             version '1.0.0'
 
