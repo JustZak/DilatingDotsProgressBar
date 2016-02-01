@@ -27,37 +27,60 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
 }
 
-version = '1.0.0'
-group = 'com.zl.reik'
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'DilatingDotsProgressBar'
+
+    publishedGroupId = 'com.github.justzak'
+    libraryName = 'DilatingDotsProgressBar'
+    artifact = 'dilatingdotsprogressbar'
+
+    libraryDescription = 'An indeterminate progress bar with dots that expand and contract'
+
+    siteUrl = 'https://github.com/JustZak/DilatingDotsProgressBar'
+    gitUrl = 'https://github.com/JustZak/DilatingDotsProgressBar.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'ZakR'
+    developerName = 'Zachary Reik'
+    developerEmail = 'justzak7@gmail.com'
+
+    licenseName = 'The MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
 
 install {
     repositories.mavenInstaller {
         pom.project {
-            name 'DilatingDotsProgressBar'
-            description 'An indeterminate progress bar with dots that expand and contract'
-            url 'https://github.com/JustZak/DilatingDotsProgressBar'
+            name bintrayName
+            description libraryDescription
+            url siteUrl
             inceptionYear '2016'
 
             packaging 'aar'
-            groupId 'com.github.justzak'
-            artifactId 'dilatingdotsprogressbar'
-            version '1.0.0'
+            groupId publishedGroupId
+            artifactId artifact
+            version libraryVersion
 
             licenses {
                 license {
-                    name 'The MIT License'
-                    url 'https://opensource.org/licenses/MIT'
+                    name licenseName
+                    url licenseUrl
                     distribution 'repo'
                 }
             }
             scm {
-                connection 'https://github.com/JustZak/DilatingDotsProgressBar.git'
-                url 'https://github.com/JustZak/DilatingDotsProgressBar'
+                connection gitUrl
+                url siteUrl
 
             }
             developers {
                 developer {
-                    name 'Zachary Reik'
+                    id developerId
+                    name developerName
+                    email developerEmail
                 }
             }
         }
@@ -90,14 +113,14 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.key")
     pkg {
-        repo = 'maven'
-        name = 'DilatingDotsProgressBar'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/JustZak/DilatingDotsProgressBar.git'
+        repo = bintrayRepo
+        name = bintrayName
+        licenses = allLicenses
+        vcsUrl = gitUrl
         publish = true
         version {
-            name = '1.0.0'
-            desc = 'DilatingDotsProgressBar version 1.0.0'
+            name = libraryVersion
+            desc = libraryDescription
             released  = new Date()
         }
     }
