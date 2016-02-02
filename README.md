@@ -6,7 +6,9 @@
 
 ##Installation
 
-Coming soon to maven central
+```
+compile 'com.github.justzak:dilatingdotsprogressbar:1.0.1'
+```
 
 ##Usage
 
