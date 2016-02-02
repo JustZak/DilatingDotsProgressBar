@@ -12,26 +12,26 @@ Coming soon to maven central
 
 ```xml
 <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
-			android:id="@+id/progress"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:radius="5dp"
-			android:color="#8C2323"
-			app:dd_numDots="3"
-			app:dd_scaleMultiplier="1.5"
-			app:dd_animationDuration="500"
-			app:dd_horizontalSpacing="4dp"
-			/>
+	android:id="@+id/progress"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:radius="5dp"
+	android:color="#8C2323"
+	app:dd_numDots="3"
+	app:dd_scaleMultiplier="1.5"
+	app:dd_animationDuration="500"
+	app:dd_horizontalSpacing="4dp"
+	/>
 ```
 
-```android
-  mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
-  
-  // show progress bar and start animating
-  mDilatingDotsProgressBar.showNow();
-  
-  // stop animation and hide
-  mDilatingDotsProgressBar.hideNow();
+```java
+mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
+
+// show progress bar and start animating
+mDilatingDotsProgressBar.showNow();
+
+// stop animation and hide
+mDilatingDotsProgressBar.hideNow();
 ```
 
 ##Field Customization
