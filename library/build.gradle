@@ -2,6 +2,18 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+    }
+}
+
+project.archivesBaseName = 'dilatingdotsprogressbar'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -9,8 +21,8 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.01"
     }
     buildTypes {
         release {
@@ -32,7 +44,7 @@ ext {
     bintrayName = 'DilatingDotsProgressBar'
 
     publishedGroupId = 'com.github.justzak'
-    libraryName = 'DilatingDotsProgressBar'
+    libraryName = 'dilatingdotsprogressbar'
     artifact = 'dilatingdotsprogressbar'
 
     libraryDescription = 'An indeterminate progress bar with dots that expand and contract'
@@ -40,7 +52,7 @@ ext {
     siteUrl = 'https://github.com/JustZak/DilatingDotsProgressBar'
     gitUrl = 'https://github.com/JustZak/DilatingDotsProgressBar.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'ZakR'
     developerName = 'Zachary Reik'
@@ -49,6 +61,54 @@ ext {
     licenseName = 'The MIT License'
     licenseUrl = 'https://opensource.org/licenses/MIT'
     allLicenses = ["MIT"]
+}
+
+group = publishedGroupId
+version = libraryVersion
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        licenses = allLicenses
+        vcsUrl = gitUrl
+        publish = true
+        version {
+            name = libraryVersion
+            desc = libraryDescription
+            released  = new Date()
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
 }
 
 install {
@@ -83,45 +143,6 @@ install {
                     email developerEmail
                 }
             }
-        }
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-// Bintray
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.key")
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        licenses = allLicenses
-        vcsUrl = gitUrl
-        publish = true
-        version {
-            name = libraryVersion
-            desc = libraryDescription
-            released  = new Date()
         }
     }
 }
