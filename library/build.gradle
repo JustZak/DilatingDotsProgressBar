@@ -85,12 +85,23 @@ artifacts {
 
 // Bintray
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+ext {
+    binUser = 'user'
+    binKey = 'key'
+    binPass = 'pass'
+    try {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        binUser = properties.getProperty("bintray.user");
+        binKey = properties.getProperty("bintray.key");
+        binPass = properties.getProperty("bintray.gpg.password");
+    } catch (Exception e) {
+    }
+}
 
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.key")
+    user = binUser
+    key = binKey
     configurations = ['archives']
     pkg {
         repo = bintrayRepo
@@ -104,7 +115,7 @@ bintray {
             released  = new Date()
             gpg {
                 sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
+                passphrase = binPass
                 //Optional. The passphrase for GPG signing'
             }
         }
