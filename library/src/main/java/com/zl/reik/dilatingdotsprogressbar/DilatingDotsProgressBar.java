@@ -15,7 +15,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DilatingDotsProgressBar extends View{
+public class DilatingDotsProgressBar extends View {
     public static final String TAG = DilatingDotsProgressBar.class.getSimpleName();
     public static final double START_DELAY_FACTOR = 0.35;
     private static final float DEFAULT_GROWTH_MULTIPLIER = 1.75f;
@@ -34,7 +34,6 @@ public class DilatingDotsProgressBar extends View{
     private boolean mDismissed = false;
     private ArrayList<DilatingDotDrawable> mDrawables = new ArrayList<>();
     private final List<Animator> mAnimations = new ArrayList<>();
-
     /** delayed runnable to stop the progress */
     private final Runnable mDelayedHide = new Runnable() {
         @Override
@@ -74,12 +73,9 @@ public class DilatingDotsProgressBar extends View{
         mNumberDots = a.getInt(R.styleable.DilatingDotsProgressBar_dd_numDots, 3);
         mDotRadius = a.getDimension(R.styleable.DilatingDotsProgressBar_android_radius, 8);
         mDotColor = a.getColor(R.styleable.DilatingDotsProgressBar_android_color, 0xff9c27b0);
-        mDotScaleMultiplier = a.getFloat(
-            R.styleable.DilatingDotsProgressBar_dd_scaleMultiplier,
-            DEFAULT_GROWTH_MULTIPLIER);
+        mDotScaleMultiplier = a.getFloat(R.styleable.DilatingDotsProgressBar_dd_scaleMultiplier, DEFAULT_GROWTH_MULTIPLIER);
         mAnimationDuration = a.getInt(R.styleable.DilatingDotsProgressBar_dd_animationDuration, 300);
-        mHorizontalSpacing =
-            a.getDimension(R.styleable.DilatingDotsProgressBar_dd_horizontalSpacing, 12);
+        mHorizontalSpacing = a.getDimension(R.styleable.DilatingDotsProgressBar_dd_horizontalSpacing, 12);
         a.recycle();
 
         mShouldAnimate = false;
@@ -219,21 +215,19 @@ public class DilatingDotsProgressBar extends View{
             dot.setCallback(this);
             mDrawables.add(dot);
 
-            ValueAnimator growAnimator =
-                ObjectAnimator.ofFloat(dot, "radius", mDotRadius, mDotMaxRadius, mDotRadius);
+            ValueAnimator growAnimator = ObjectAnimator.ofFloat(dot, "radius", mDotRadius, mDotMaxRadius, mDotRadius);
             growAnimator.setDuration(mAnimationDuration);
             growAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
             if (i == mNumberDots) {
-                growAnimator.addListener(
-                    new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            if (shouldAnimate()) {
-                                startAnimations();
-                            }
+                growAnimator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (shouldAnimate()) {
+                            startAnimations();
                         }
-                    });
+                    }
+                });
             }
 
             growAnimator.setStartDelay((i - 1) * (int) (START_DELAY_FACTOR * mAnimationDuration));
@@ -327,7 +321,7 @@ public class DilatingDotsProgressBar extends View{
         }
     }
 
-    private void setupDots(){
+    private void setupDots() {
         initDots();
         updateDots();
         showNow();

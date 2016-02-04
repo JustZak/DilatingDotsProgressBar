@@ -25,13 +25,10 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private TextView mSpacingTextView;
     private TextView mAnimationDurationTextView;
     private DilatingDotsProgressBar mDilatingDotsProgressBar;
-
     private final float scaleMin = 1.2f;
     private final float scaleMax = 4.0f;
-
     private final float saturation = 0.75f;
     private final float value = 0.55f;
-
     private final int numDotsMin = 2;
 
     @Override
@@ -67,18 +64,18 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         setupSeekbars();
     }
 
-    private void setupSeekbars(){
+    private void setupSeekbars() {
         int dots = mDilatingDotsProgressBar.getNumberOfDots();
         dots = (dots < numDotsMin) ? numDotsMin : dots;
         mNumberDotsSeekbar.setProgress(dots - numDotsMin);
         mNumberDotsSeekbar.setOnSeekBarChangeListener(this);
         mNumDotsTextView.setText(String.valueOf(dots));
 
-        mRadiusSeekbar.setProgress((int)mDilatingDotsProgressBar.getDotRadius());
+        mRadiusSeekbar.setProgress((int) mDilatingDotsProgressBar.getDotRadius());
         mRadiusSeekbar.setOnSeekBarChangeListener(this);
         mRadiusTextView.setText(String.valueOf(mDilatingDotsProgressBar.getDotRadius()));
 
-        mSpacingSeekbar.setProgress((int)mDilatingDotsProgressBar.getHorizontalSpacing());
+        mSpacingSeekbar.setProgress((int) mDilatingDotsProgressBar.getHorizontalSpacing());
         mSpacingSeekbar.setOnSeekBarChangeListener(this);
         mSpacingTextView.setText(String.valueOf(mDilatingDotsProgressBar.getHorizontalSpacing()));
 
@@ -86,11 +83,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mAnimationDurationSeekbar.setOnSeekBarChangeListener(this);
         mAnimationDurationTextView.setText(String.valueOf(mDilatingDotsProgressBar.getDotGrowthSpeed()));
 
-        int progress = seekbarProgressFromValue(
-            scaleMin,
-            scaleMax,
-            mDilatingDotsProgressBar.getDotScaleMultiplier(),
-            mScaleMultiplierSeekbar.getMax());
+        int progress = seekbarProgressFromValue(scaleMin, scaleMax, mDilatingDotsProgressBar.getDotScaleMultiplier(),
+            mScaleMultiplierSeekbar.getMax()
+        );
         mScaleMultiplierSeekbar.setProgress(progress);
         mScaleMultiplierSeekbar.setOnSeekBarChangeListener(this);
         mScaleMultiplierTextView.setText(String.valueOf(mDilatingDotsProgressBar.getDotScaleMultiplier()));
@@ -117,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             mDilatingDotsProgressBar.setDotColor(getHSVColor(progress));
             mColorTextView.setText(Integer.toHexString(getHSVColor(progress)));
         } else if (seekBar == mScaleMultiplierSeekbar) {
-            float scale = lerp(scaleMin, scaleMax, progress/100f);
+            float scale = lerp(scaleMin, scaleMax, progress / 100f);
             mDilatingDotsProgressBar.setDotScaleMultpiplier(scale);
             mScaleMultiplierTextView.setText(String.format("%.2f", scale));
         }
@@ -133,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
     }
 
-    private int getHSVColor(int progress){
+    private int getHSVColor(int progress) {
         float[] hsvColor = {0, saturation, value};
         hsvColor[0] = 360f * progress / 100f;
         return Color.HSVToColor(hsvColor);
@@ -146,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private int seekbarProgressFromValue(float min, float max, float currentValue, int seekbarMax) {
         float progress = currentValue - min;
         float totalProgress = max - min;
-        float progressPercent = progress/totalProgress;
+        float progressPercent = progress / totalProgress;
         return (int) (progressPercent * seekbarMax);
     }
 }
