@@ -32,6 +32,7 @@ public class DilatingDotsProgressBar extends View {
     private long mStartTime = -1;
     private boolean mShouldAnimate;
     private boolean mDismissed = false;
+    private boolean mIsRunning = false;
     private ArrayList<DilatingDotDrawable> mDrawables = new ArrayList<>();
     private final List<Animator> mAnimations = new ArrayList<>();
     /** delayed runnable to stop the progress */
@@ -39,6 +40,7 @@ public class DilatingDotsProgressBar extends View {
         @Override
         public void run() {
             mStartTime = -1;
+            mIsRunning = false;
             setVisibility(View.GONE);
             stopAnimations();
         }
@@ -154,6 +156,12 @@ public class DilatingDotsProgressBar extends View {
     }
 
     public void show(int delay) {
+        if (mIsRunning) {
+            return;
+        }
+
+        mIsRunning = true;
+
         mStartTime = -1;
         mDismissed = false;
         removeCallbacks(mDelayedHide);
