@@ -17,11 +17,13 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private AppCompatSeekBar mAnimationDurationSeekbar;
     private AppCompatSeekBar mNumberDotsSeekbar;
     private AppCompatSeekBar mColorSeekbar;
+    private AppCompatSeekBar mColor2Seekbar;
     private AppCompatSeekBar mScaleMultiplierSeekbar;
     private TextView mNumDotsTextView;
     private TextView mScaleMultiplierTextView;
     private TextView mRadiusTextView;
     private TextView mColorTextView;
+    private TextView mColor2TextView;
     private TextView mSpacingTextView;
     private TextView mAnimationDurationTextView;
     private DilatingDotsProgressBar mDilatingDotsProgressBar;
@@ -48,12 +50,14 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mSpacingSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_spacing);
         mAnimationDurationSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_animation_duration);
         mColorSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_color);
+        mColor2Seekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_color_2);
         mScaleMultiplierSeekbar = (AppCompatSeekBar) findViewById(R.id.seekbar_scale_multiplier);
 
         mNumDotsTextView = (TextView) findViewById(R.id.textview_num_dots);
         mScaleMultiplierTextView = (TextView) findViewById(R.id.textview_scale_multiplier);
         mAnimationDurationTextView = (TextView) findViewById(R.id.textview_animation_duration);
         mColorTextView = (TextView) findViewById(R.id.textview_color);
+        mColor2TextView = (TextView) findViewById(R.id.textview_color_2);
         mRadiusTextView = (TextView) findViewById(R.id.textview_radius);
         mSpacingTextView = (TextView) findViewById(R.id.textview_spacing);
     }
@@ -91,7 +95,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mScaleMultiplierTextView.setText(String.valueOf(mDilatingDotsProgressBar.getDotScaleMultiplier()));
 
         mColorSeekbar.setOnSeekBarChangeListener(this);
+        mColor2Seekbar.setOnSeekBarChangeListener(this);
         mColorTextView.setText(Integer.toHexString(getHSVColor(0)));
+        mColor2TextView.setText("0%");
     }
 
     @Override
@@ -111,9 +117,14 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         } else if (seekBar == mColorSeekbar) {
             mDilatingDotsProgressBar.setDotColor(getHSVColor(progress));
             mColorTextView.setText(Integer.toHexString(getHSVColor(progress)));
+        } else if (seekBar == mColor2Seekbar) {
+            int mainColor = getHSVColor(mColorSeekbar.getProgress());
+            int secondaryColor = Color.argb(progress, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+            mDilatingDotsProgressBar.setDotColors(mainColor, secondaryColor);
+            mColor2TextView.setText(String.valueOf((int) (progress / (float) seekBar.getMax() * 100)) + "%");
         } else if (seekBar == mScaleMultiplierSeekbar) {
             float scale = lerp(scaleMin, scaleMax, progress / 100f);
-            mDilatingDotsProgressBar.setDotScaleMultpiplier(scale);
+            mDilatingDotsProgressBar.setDotScaleMultiplier(scale);
             mScaleMultiplierTextView.setText(String.format("%.2f", scale));
         }
     }
