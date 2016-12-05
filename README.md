@@ -38,7 +38,7 @@ mDilatingDotsProgressBar.hideNow();
 
 ##Field Customization
 |name|format|description|
-|:---:|:---:|:---:|
+|:---|:---|:---|
 | android:radius | dimension | set the radius of each dot
 | android:color | int | set the color of each dot
 | dd_numDots | integer |set number of dots

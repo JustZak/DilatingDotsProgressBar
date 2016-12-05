@@ -25,6 +25,7 @@
 			android:layout_gravity="center"
 			android:radius="5dp"
 			android:color="#8C2323"
+			app:dd_endColor="#208c2323"
 			app:dd_numDots="3"
 			app:dd_scaleMultiplier="1.5"
 			app:dd_animationDuration="500"
@@ -139,6 +140,24 @@
 
 		<TextView
 			android:id="@+id/textview_color"
+			style="@style/SeekbarValueText"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		style="@style/SeekbarLayout">
+
+		<TextView
+			style="@style/SeekbarLabel"
+			android:text="@string/color_2"/>
+
+		<android.support.v7.widget.AppCompatSeekBar
+			android:id="@+id/seekbar_color_2"
+			style="@style/Seekbar"
+			android:max="255"/>
+
+		<TextView
+			android:id="@+id/textview_color_2"
 			style="@style/SeekbarValueText"/>
 
 	</LinearLayout>
