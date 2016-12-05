@@ -7,4 +7,5 @@
 	<string name="animation_duration">Animation Length:</string>
 	<string name="scale_multiplier">Scale Multiplier:</string>
 	<string name="color">Color:</string>
+	<string name="color_2">Secondary color:</string>
 </resources>

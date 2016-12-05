@@ -2,12 +2,14 @@ package com.zl.reik.dilatingdotsprogressbar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -22,6 +24,7 @@ public class DilatingDotsProgressBar extends View {
     private static final int MIN_SHOW_TIME = 500; // ms
     private static final int MIN_DELAY = 500; // ms
     private int mDotColor;
+    private int mDotEndColor;
     private int mAnimationDuration;
     private int mWidthBetweenDotCenters;
     private int mNumberDots;
@@ -33,6 +36,7 @@ public class DilatingDotsProgressBar extends View {
     private boolean mShouldAnimate;
     private boolean mDismissed = false;
     private boolean mIsRunning = false;
+    private boolean mAnimateColors = false;
     private ArrayList<DilatingDotDrawable> mDrawables = new ArrayList<>();
     private final List<Animator> mAnimations = new ArrayList<>();
     /** delayed runnable to stop the progress */
@@ -45,6 +49,7 @@ public class DilatingDotsProgressBar extends View {
             stopAnimations();
         }
     };
+
     /** delayed runnable to start the progress */
     private final Runnable mDelayedShow = new Runnable() {
         @Override
@@ -75,12 +80,14 @@ public class DilatingDotsProgressBar extends View {
         mNumberDots = a.getInt(R.styleable.DilatingDotsProgressBar_dd_numDots, 3);
         mDotRadius = a.getDimension(R.styleable.DilatingDotsProgressBar_android_radius, 8);
         mDotColor = a.getColor(R.styleable.DilatingDotsProgressBar_android_color, 0xff9c27b0);
+        mDotEndColor = a.getColor(R.styleable.DilatingDotsProgressBar_dd_endColor, mDotColor);
         mDotScaleMultiplier = a.getFloat(R.styleable.DilatingDotsProgressBar_dd_scaleMultiplier, DEFAULT_GROWTH_MULTIPLIER);
         mAnimationDuration = a.getInt(R.styleable.DilatingDotsProgressBar_dd_animationDuration, 300);
         mHorizontalSpacing = a.getDimension(R.styleable.DilatingDotsProgressBar_dd_horizontalSpacing, 12);
         a.recycle();
 
         mShouldAnimate = false;
+        mAnimateColors = mDotColor != mDotEndColor;
         calculateMaxRadius();
         calculateWidthBetweenDotCenters();
 
@@ -223,10 +230,12 @@ public class DilatingDotsProgressBar extends View {
             dot.setCallback(this);
             mDrawables.add(dot);
 
+            final long startDelay = (i - 1) * (int) (START_DELAY_FACTOR * mAnimationDuration);
+
+            // Sizing
             ValueAnimator growAnimator = ObjectAnimator.ofFloat(dot, "radius", mDotRadius, mDotMaxRadius, mDotRadius);
             growAnimator.setDuration(mAnimationDuration);
             growAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-
             if (i == mNumberDots) {
                 growAnimator.addListener(new AnimatorListenerAdapter() {
                     @Override
@@ -237,9 +246,37 @@ public class DilatingDotsProgressBar extends View {
                     }
                 });
             }
+            growAnimator.setStartDelay(startDelay);
 
-            growAnimator.setStartDelay((i - 1) * (int) (START_DELAY_FACTOR * mAnimationDuration));
             mAnimations.add(growAnimator);
+
+            if (mAnimateColors) {
+                // Gradient
+                ValueAnimator colorAnimator = ValueAnimator.ofInt(mDotEndColor, mDotColor);
+                colorAnimator.setDuration(mAnimationDuration);
+                colorAnimator.setEvaluator(new ArgbEvaluator());
+                colorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        dot.setColor((int) animator.getAnimatedValue());
+                    }
+
+                });
+                if (i == mNumberDots) {
+                    colorAnimator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            if (shouldAnimate()) {
+                                startAnimations();
+                            }
+                        }
+                    });
+                }
+                colorAnimator.setStartDelay(startDelay);
+
+                mAnimations.add(colorAnimator);
+            }
         }
     }
 
@@ -315,17 +352,51 @@ public class DilatingDotsProgressBar extends View {
         setupDots();
     }
 
-    public void setDotScaleMultpiplier(float multplier) {
+    public void setDotScaleMultiplier(float multiplier) {
         reset();
-        mDotScaleMultiplier = multplier;
+        mDotScaleMultiplier = multiplier;
         calculateMaxRadius();
         setupDots();
     }
 
     public void setDotColor(int color) {
-        mDotColor = color;
-        for (DilatingDotDrawable dot : mDrawables) {
-            dot.setColor(mDotColor);
+        if (color != mDotColor) {
+            if (mAnimateColors) {
+                // Cancel previous animations
+                reset();
+                mDotColor = color;
+                mDotEndColor = color;
+                mAnimateColors = false;
+
+                setupDots();
+
+            } else {
+                mDotColor = color;
+                for (DilatingDotDrawable dot : mDrawables) {
+                    dot.setColor(mDotColor);
+                }
+            }
+        }
+    }
+
+    /**
+     * Set different start and end colors for dots. This will result in gradient behaviour. In case you want set 1 solid
+     * color - use {@link #setDotColor(int)} instead
+     *
+     * @param startColor starting color of the dot
+     * @param endColor   ending color of the dot
+     */
+    public void setDotColors(@ColorInt int startColor, @ColorInt int endColor) {
+        if (mDotColor != startColor || mDotEndColor != endColor) {
+            if (mAnimateColors) {
+                reset();
+            }
+            mDotColor = startColor;
+            mDotEndColor = endColor;
+
+            mAnimateColors = mDotColor != mDotEndColor;
+
+            setupDots();
         }
     }
 
