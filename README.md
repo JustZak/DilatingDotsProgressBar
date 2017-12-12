@@ -1,16 +1,15 @@
-#DilatingDotsProgressBar
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DilatingDotsProgressBar-green.svg?style=true)](https://android-arsenal.com/details/1/3088)
+# DilatingDotsProgressBar [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DilatingDotsProgressBar-green.svg?style=true)](https://android-arsenal.com/details/1/3088)
 
 
 ![](/../demo/example/src/main/assets/dotdemo.gif?raw=true)
 
-##Installation
+## Installation
 
 ```
 compile 'com.github.justzak:dilatingdotsprogressbar:1.0.1'
 ```
 
-##Usage
+## Usage
 
 ```xml
 <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
@@ -36,7 +35,7 @@ mDilatingDotsProgressBar.showNow();
 mDilatingDotsProgressBar.hideNow();
 ```
 
-##Field Customization
+## Field Customization
 |name|format|description|
 |:---|:---|:---|
 | android:radius | dimension | set the radius of each dot
@@ -48,7 +47,7 @@ mDilatingDotsProgressBar.hideNow();
 
 
 
-##Credit
+## Credit
 Thanks to [Alessandro Crugnola](https://github.com/sephiroth74) for his contributions.
 
 ## License
